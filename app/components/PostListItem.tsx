@@ -27,7 +27,6 @@ export default function PostListItem({ post }: PostProps) {
         action={async() => {
           // TODO: Doesn't seem to work on dev. Updates the state then immediately sets it back?
           updateLikesOptimistically(post.likes + 1);
-          await new Promise((resolve) => setTimeout(resolve, 5000));
           updatePostLikes(post.id, post.likes + 1);
         }}
         ref={formRef}
