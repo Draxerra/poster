@@ -1,23 +1,25 @@
-import { notFound } from "next/navigation";
-import { sql } from "@vercel/postgres";
-import Link from "next/link";
+import PostSection from "@/app/components/PostSection";
+import { getPost } from "@/app/utils/posts";
 
-import { buttonStyles } from "@/app/components/Button";
-
-export default async function Post({ params }: { params: { id: string }}) {
-  const { rows } = await sql`SELECT * from posts WHERE id=${params.id}`;
-  if (!rows[0]?.post) {
-    notFound();
+type PageProps = {
+  params: {
+    id: string;
   }
+}
+
+export async function generateMetadata({ params: { id }}: PageProps) {
+  const { post } = await getPost(id);
+  return {
+    description: post,
+    title: 'Post',
+  }
+}
+
+export default async function PostPage({ params: { id }}: PageProps) {
   return (
     <main className='p-8'>
-      <section aria-labelledby='post-heading' className='mb-8 space-y-4'>
-        <h1 className='text-5xl font-bold' id='post-heading'>Post</h1>
-        <div className='bg-white shadow-xl divide-y-2 divide-neutral-100'>
-          <p className='p-4'>{rows[0].post}</p>
-        </div>
-        <Link className={buttonStyles} href='/'>Back</Link>
-      </section>
+      { /* @ts-expect-error */}
+      <PostSection id={id} />
     </main>
   )
 }

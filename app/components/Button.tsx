@@ -6,7 +6,7 @@ export const buttonStyles = clsx(
   'active:bg-red-900 hover:bg-red-800',
 );
 
-function Button(props: JSX.IntrinsicElements['button']) {
+export default function Button(props: JSX.IntrinsicElements['button']) {
   return (
     <button
       {...props}
@@ -17,5 +17,3 @@ function Button(props: JSX.IntrinsicElements['button']) {
     />
   )
 }
-
-export default Button;
