@@ -1,20 +1,26 @@
+import { sql } from "@vercel/postgres";
+import { revalidatePath } from "next/cache";
+import Button from "./Button";
+
 export default function PostForm() {
   async function PostFormHandler(data: FormData) {
     'use server';
-    console.log(data);
+    const post = data.get('post');
+    if (typeof post !== 'string') {
+      throw new Error('Post is invalid!');
+    }
+    await sql`INSERT INTO posts (Post) VALUES (${post})`;
+    revalidatePath('/');
   }
   return (
     <form action={PostFormHandler} className='flex flex-col gap-y-4'>
       <label className='flex flex-col gap-y-2'>
-        Add a comment
-        <textarea className='p-4' name='message' rows={4} />
+        <span className='font-bold'>Add a comment</span>
+        <textarea className='p-4 shadow-xl' name='post' rows={4} />
       </label>
-      <button
-        className='self-start bg-red-700 text-neutral-100 py-4 px-6 rounded-lg active:bg-red-900 hover:bg-red-800'
-        type='submit'
-      >
+      <Button className='self-start' type='submit'>
         Add Comment
-      </button>
+      </Button>
     </form>
   )
 }
