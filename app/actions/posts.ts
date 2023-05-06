@@ -5,8 +5,8 @@ import { revalidatePath } from "next/cache";
 
 export async function updatePostLikes(id: string, likes: number) {
   await sql`UPDATE posts SET Likes = ${likes} WHERE id=${id}`;
-  // TODO: Revalidate tag would be better here? How to add a tag to `cache`?
   revalidatePath('/');
+  revalidatePath(`/post/${id}`);
 }
 
 export async function createPost(data: FormData) {
