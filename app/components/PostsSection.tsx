@@ -11,7 +11,7 @@ export default async function Posts() {
       <ul className='bg-white shadow-xl divide-y-2 divide-neutral-100'>
         {posts.map(post => (
           <PostListItem key={post.id} post={post}>
-            <Link className='underline text-blue-800' href={`/post/${post.id}`}>{post.message}</Link>
+            <Link className='underline text-blue-800 visited:text-purple-800' href={`/post/${post.id}`}>{post.message}</Link>
           </PostListItem>
         ))}
       </ul>
