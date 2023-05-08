@@ -10,7 +10,7 @@ export default async function Posts() {
       <h1 className='text-5xl font-bold mb-4' id='posts-heading'>List of Posts</h1>
       <ul className='bg-white shadow-xl divide-y-2 divide-neutral-100'>
         {posts.map(post => (
-          <PostListItem key={post.id} id={post.id} likes={post.likes}>
+          <PostListItem key={post.id} post={post}>
             <Link className='underline text-blue-800' href={`/post/${post.id}`}>{post.message}</Link>
           </PostListItem>
         ))}
