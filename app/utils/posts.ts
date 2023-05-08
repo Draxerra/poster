@@ -6,7 +6,7 @@ import 'server-only';
 import { Post } from '@/app/types/post';
 
 export const getPost = cache(async function getPost(id: string) {
-  const { rows } = await sql`SELECT * from posts WHERE Id=${id}`;
+  const { rows } = await sql`SELECT * from posts WHERE id=${id}`;
   if (!rows[0]) {
     notFound();
   }
@@ -19,6 +19,6 @@ export const getPosts = cache(async function getPosts() {
 });
 
 export const getPostIds = cache(async function getPostIds() {
-  const { rows } = await sql`SELECT Id from posts`;
+  const { rows } = await sql`SELECT id from posts`;
   return rows as Pick<Post, 'id'>[];
 });
