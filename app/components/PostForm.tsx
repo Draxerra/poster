@@ -1,5 +1,5 @@
-import Button from "@/app/components/Button";
 import { createPost } from "@/app/actions/posts";
+import Button from "@/app/components/Button";
 
 export default function PostForm() {
   return (

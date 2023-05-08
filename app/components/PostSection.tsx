@@ -14,7 +14,9 @@ export default async function Post({ id }: PostProps) {
     <section aria-labelledby='post-heading' className='mb-8 space-y-4'>
       <h1 className='text-5xl font-bold' id='post-heading'>Post</h1>
       <ul className='bg-white shadow-xl divide-y-2 divide-neutral-100'>
-        <PostListItem post={post} />
+        <PostListItem id={post.id} likes={post.likes}>
+          <span>{post.message}</span>
+        </PostListItem>
       </ul>
       <Link className={buttonStyles} href='/'>Back</Link>
     </section>
