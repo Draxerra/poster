@@ -13,7 +13,10 @@ export async function updatePostLikes(id: number, likes: number) {
 export async function createPost(data: FormData) {
   const message = data.get('message');
   if (typeof message !== 'string') {
-    throw new Error('Message is invalid!');
+    throw new Error('Message is invalid.');
+  }
+  if (message.length === 0) {
+    throw new Error('Message is required.');
   }
   await sql`INSERT INTO posts (message, likes) VALUES (${message}, 0)`;
   /** Ditto */
