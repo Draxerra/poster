@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 
 export async function updatePostLikes(id: number, likes: number) {
   await sql`UPDATE posts SET Likes = ${likes} WHERE Id=${id}`;
+  /** Currently bugged? Doesn't seem to trigger a revalidation */
   revalidatePath('/');
   revalidatePath(`/post/${id}`);
 }
@@ -15,5 +16,6 @@ export async function createPost(data: FormData) {
     throw new Error('Message is invalid!');
   }
   await sql`INSERT INTO posts (Message, Likes) VALUES (${message}, 0)`;
+  /** Ditto */
   revalidatePath('/');
 }

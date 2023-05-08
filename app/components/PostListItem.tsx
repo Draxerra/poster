@@ -18,7 +18,7 @@ export default function PostListItem({ children, id, likes }: PostProps) {
       {children}
       <form
         action={async() => {
-          // TODO: Doesn't seem to work on dev. Updates the state then immediately sets it back?
+          // Doesn't seem to work on dev? Updates the state then immediately sets it back?
           updateLikesOptimistically(likes + 1);
           formRef.current?.reset();
           updatePostLikes(id, likes + 1);

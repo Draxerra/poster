@@ -8,7 +8,7 @@ type PageProps = {
 }
 
 
-/* Currently bugged with server actions - method not allowed */
+/* Currently bugged with server actions + static pages - method not allowed */
 export const revalidate = 60;
 export async function generateStaticParams() {
   const ids = await getPostIds();

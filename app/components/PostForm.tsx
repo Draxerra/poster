@@ -1,6 +1,7 @@
 import { createPost } from "@/app/actions/posts";
 import Button from "@/app/components/Button";
 
+/** Seems to force pages to dynamic? */
 export default function PostForm() {
   return (
     <form action={createPost} className='flex flex-col gap-y-4'>
