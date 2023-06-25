@@ -1,4 +1,4 @@
-import prisma from './prisma';
+import { prisma } from './prisma';
 import { notFound } from 'next/navigation';
 import { cache } from 'react';
 import 'server-only';
