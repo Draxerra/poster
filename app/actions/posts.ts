@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from "@/app/utils/prisma";
+import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export type FormReturnData = {
