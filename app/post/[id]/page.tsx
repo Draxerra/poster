@@ -9,13 +9,13 @@ type PageProps = {
 
 
 /* Currently bugged with server actions + static pages - method not allowed */
-export const revalidate = 60;
-export async function generateStaticParams() {
-  const ids = await getPostIds();
-  return ids.map(({ id }) => ({
-    id: id.toString(),
-  }));
-}
+// export const revalidate = 60;
+// export async function generateStaticParams() {
+//   const ids = await getPostIds();
+//   return ids.map(({ id }) => ({
+//     id: id.toString(),
+//   }));
+// }
 
 export async function generateMetadata({ params: { id }}: PageProps) {
   const { message } = await getPost(id);
@@ -28,7 +28,6 @@ export async function generateMetadata({ params: { id }}: PageProps) {
 export default async function PostPage({ params: { id }}: PageProps) {
   return (
     <main className='p-8'>
-      { /* @ts-expect-error */}
       <PostSection id={id} />
     </main>
   )
