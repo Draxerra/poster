@@ -3,7 +3,7 @@
 import { experimental_useOptimistic as useOptimistic, useRef } from 'react';
 
 import { updatePostLikes } from '@/app/actions/posts';
-import type { Post } from '@/app/types/post';
+import type { Post } from '@prisma/client';
 
 type PostProps = React.PropsWithChildren<{
   post: Post;

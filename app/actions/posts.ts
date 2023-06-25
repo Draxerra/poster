@@ -1,6 +1,6 @@
 'use server'
 
-import { sql } from "@vercel/postgres";
+import prisma from "@/app/utils/prisma";
 import { revalidatePath } from "next/cache";
 
 export type FormReturnData = {
@@ -8,7 +8,14 @@ export type FormReturnData = {
 }
 
 export async function updatePostLikes(id: number, likes: number) {
-  await sql`UPDATE posts SET likes = ${likes} WHERE id=${id}`;
+  await prisma.post.update({
+    where: {
+      id,
+    },
+    data: {
+      likes,
+    }
+  });
   /** Currently bugged? Doesn't seem to trigger a revalidation */
   revalidatePath('/');
   revalidatePath(`/post/${id}`);
@@ -22,7 +29,12 @@ export async function createPost(data: FormData): Promise<FormReturnData> {
   if (message.length === 0) {
     return { errors: { message: 'Message is required.' } };
   }
-  await sql`INSERT INTO posts (message, likes) VALUES (${message}, 0)`;
+  await prisma.post.create({
+    data: {
+      message,
+      likes: 0,
+    }
+  });
   /** Ditto */
   revalidatePath('/');
   return { errors: {} };

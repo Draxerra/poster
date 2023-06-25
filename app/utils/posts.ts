@@ -1,24 +1,30 @@
-import { sql } from '@vercel/postgres';
+import prisma from './prisma';
 import { notFound } from 'next/navigation';
 import { cache } from 'react';
 import 'server-only';
 
-import { Post } from '@/app/types/post';
-
 export const getPost = cache(async function getPost(id: string) {
-  const { rows } = await sql`SELECT * from posts WHERE id=${id}`;
-  if (!rows[0]) {
+  const post = await prisma.post.findUnique({
+    where: {
+      id: parseInt(id),
+    }
+  })
+  if (!post) {
     notFound();
   }
-  return rows[0] as Post;
+  return post;
 });
 
 export const getPosts = cache(async function getPosts() {
-  const { rows } = await sql`SELECT * from posts`;
-  return rows as Post[];
+  const posts = await prisma.post.findMany();
+  return posts;
 });
 
 export const getPostIds = cache(async function getPostIds() {
-  const { rows } = await sql`SELECT id from posts`;
-  return rows as Pick<Post, 'id'>[];
+  const ids = await prisma.post.findMany({
+    select: {
+      id: true,
+    },
+  });
+  return ids;
 });
