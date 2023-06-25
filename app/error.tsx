@@ -7,7 +7,7 @@ type ErrorProps = {
   reset: () => void;
 }
 
-export default function Error({ error, reset }: ErrorProps) {
+export default function Error({ reset }: ErrorProps) {
   return (
     <main className='p-8'>
       <section aria-labelledby='error-heading' className='space-y-4 text-center'>
