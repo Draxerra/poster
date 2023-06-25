@@ -16,7 +16,6 @@ export async function updatePostLikes(id: number, likes: number) {
       likes,
     }
   });
-  /** Currently bugged? Doesn't seem to trigger a revalidation */
   revalidatePath('/');
   revalidatePath(`/post/${id}`);
 }
@@ -35,7 +34,6 @@ export async function createPost(data: FormData): Promise<FormReturnData> {
       likes: 0,
     }
   });
-  /** Ditto */
   revalidatePath('/');
   return { errors: {} };
 }

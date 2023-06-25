@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { cache } from 'react';
 import 'server-only';
 
+/** Future: Add tags to these + call revalidateTag()? */
 export const getPost = cache(async function getPost(id: string) {
   const post = await prisma.post.findUnique({
     where: {
